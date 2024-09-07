@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>تشغيل الصوت وإظهار إشعار</title>
+</head>
+<body>
+  <h3>جاري تشغيل الصوت وإظهار الإشعار...</h3>
+
+  <!-- عنصر صوتي -->
+  <audio id="audio" src="https://github.com/7odasaeed/notification-sound-1/raw/main/Notification%20sound.wav" type="audio/wav"></audio>
+
+  <script>
+    window.onload = function() {
+      var audio = document.getElementById('audio');
+      audio.play().catch(error => {
+        console.error('Error playing sound:', error);
+      });
+      
+      // إظهار إشعار في المتصفح
+      if (Notification.permission === 'granted') {
+        new Notification('إشعار: حدث جديد!');
+      } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            new Notification('إشعار: حدث جديد!');
+          }
+        });
+      }
+    };
+  </script>
+</body>
+</html>
